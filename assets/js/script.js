@@ -33,6 +33,7 @@ $.ajax(settings1).done(function (response) {
     console.log(response);
 });
 
+
 // Get the input for the wine 
 // generate the food items
 //pick if there is any allergy or preference
