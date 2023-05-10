@@ -25,13 +25,19 @@ function passWine(type){
     };
 
     $.ajax(settings).done(function (dataWine) {
+        console.log(dataWine);
+        //remove previous food items 
+        $('.foodRecom').empty();
         let = wineDescription = dataWine.text;
         //pick if there is any allergy or preference
         let dietpref = '';
         $('#wineDesc').text(dataWine.text);
         // generate the food items
-        for(let i = 0; i<dataWine.pairings.length; i++ ){
-            $('#option' + i).text(dataWine.pairings[i]).val(dataWine.pairings[i]);
+         for(let i = 0; i<dataWine.pairings.length; i++ ){
+            current = dataWine.pairings[i];
+            buttonFood = $('<button>');
+            buttonFood.attr('id','option'+i).addClass('btn btn-light').text(current).val(current);
+            $('.foodRecom').append(buttonFood);
         }
 
         $('.foodRecom').on('click','.btn', function(){
@@ -87,9 +93,7 @@ function passWine(type){
     function init(){
         $('#submitB').on('click',getWine);
         
-        
-        
-    }
+     }
     init();
     
     
