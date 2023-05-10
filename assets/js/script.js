@@ -39,3 +39,4 @@ $.ajax(settings1).done(function (response) {
 //based on the picked food item and the allergy populate the cards 
 //get the selected name of the recipe (clicked)
 //store the recipe and type of wine in an object( Name, picture, link, type Of Wine )
+
