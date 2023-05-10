@@ -21,12 +21,18 @@ function passWine(type){
         }
     };
 
-    $.ajax(settings).done(function (response) {
-
-        
-        console.log(response);
-        // generate the food items
+    $.ajax(settings).done(function (dataWine) {
+        let = wineDescription = dataWine.text;
         //pick if there is any allergy or preference
+        let dietpref = '';
+        $('#wineDesc').text(dataWine.text);
+        // generate the food items
+        for(let i = 0; i<dataWine.pairings.length; i++ ){
+            $('#option' + i).text(dataWine.pairings[i]).val(dataWine.pairings[i]);
+        }
+        
+
+        console.log(dataWine);
 
         
         // //generate recipes api 
