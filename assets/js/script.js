@@ -1,7 +1,6 @@
 //pair the wine api (Based on the type of wine generate food items)
 let wineType;
 let fooditem;
-
 const settings = {
     async: true,
     crossDomain: true,
@@ -32,6 +31,11 @@ const settings1 = {
 $.ajax(settings1).done(function (response) {
     console.log(response);
 });
+function getWine(){
+    wineType = $('#inputWine').val();
+    console.log(wineType)
+}
+$('#submitB').on('click',getWine);
 
 
 // Get the input for the wine 
