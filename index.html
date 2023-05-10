@@ -36,37 +36,48 @@
         <input id="inputWine" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
         <button id="submitB">Look up this wine</button>
       </div>
-    <p>Add wine desc here</p>
+    <p id="wineDesc">Add wine desc here</p>
     <h2>Select any dietary restrictions:</h2>
     <!-- dietary restrictions cards -->
-    <button type="button" class="btn btn-light btn-lg">Food Option 1</button>
-    <button type="button" class="btn btn-dark btn-lg">Food Option 2</button>
-    <button type="button" class="btn btn-light btn-lg">Food Option 3</button>
+    
+    <div>
+      <button id="gf" type="button" class="btn btn-light btn-lg">Gluten Free</button>
+      <button id="df"type="button" class="btn btn-dark btn-lg">Dairy Free</button>
+      <button id="vg" type="button" class="btn btn-light btn-lg">Vegetarian</button>
+    </div>
       </div>
     <!-- three food recommendations -->
+    <div class="foodRecom">
     <h2>Here are some food recommendations:</h2>
-    <button type="button" class="btn btn-light btn-lg">Food Option 1</button>
-    <button type="button" class="btn btn-dark btn-lg">Food Option 2</button>
-    <button type="button" class="btn btn-light btn-lg">Food Option 3</button>
-
+      
+      <button id="option0" type="button" class="btn btn-light btn-lg">Food Option 1</button>
+      <button id="option1" type="button" class="btn btn-dark btn-lg">Food Option 2</button>
+      <button id="option2" type="button" class="btn btn-light btn-lg">Food Option 3</button>
+      <button id="option3" type="button" class="btn btn-light btn-lg">Food Option 4</button>
+      <button id="option4" type="button" class="btn btn-light btn-lg">Food Option 5</button>
+    </div>
+      
     <h2>Here are some recipes:</h2>
     <div class="card-group">
         <div class="card">
-          <img src="..." class="card-img-top" alt="...">
+          <img id="img0" src="..." class="card-img-top" alt="...">
           <div class="card-body">
-            <p class="card-text">URL for recipe #1</p>
+            <h4 id="name0">Name</h4>
+            <a id="link0"  class="card-text">URL for recipe #1</a>
           </div>
         </div>
         <div class="card">
-          <img src="..." class="card-img-top" alt="...">
+          <img id="img1" src="..." class="card-img-top" alt="...">
           <div class="card-body">
-            <p class="card-text">URL for recipe #2</p>
+            <h4 id="name1">Name</h4>
+            <a id="link1"  class="card-text">URL for recipe #2</a>
           </div>
         </div>
         <div class="card">
-          <img src="..." class="card-img-top" alt="...">
+          <img id="img2" src="..." class="card-img-top" alt="...">
           <div class="card-body">
-            <p class="card-text">URL for recipe #3</p>
+            <h4 id="name2">Name</h4>
+            <a id="link2" class="card-text">URL for recipe #3</a>
           </div>
         </div>
       </div>
