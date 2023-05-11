@@ -41,6 +41,7 @@ function passWine(type) {
             buttonFood.attr('id', 'option' + i).addClass('btn btn-light').text(current).val(current);
             $('.foodRecom').append(buttonFood);
         }
+        $('#starterRemove').removeClass('hidden');
        
 
         $('.foodRecom').on('click', '.btn', function () {
@@ -89,6 +90,7 @@ function passWine(type) {
                     //link
                     $('#link' + j).text("Link to this recipe").attr('href', recipes.hits[j].recipe.url);
                 }
+                $('#showRecipes').removeClass('hidden');
             });
         })
 
