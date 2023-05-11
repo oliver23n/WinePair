@@ -1,7 +1,7 @@
 
 let wineType;
 let fooditem;
-let dietpref = '';
+
 
 // Get the input for the wine 
 function getWine() {
@@ -23,7 +23,10 @@ function passWine(type) {
         }
     };
 
-    $.ajax(settings).done(function (dataWine) {
+    $.ajax(settings).fail(function(){
+        $('#notSupported').modal('show');
+    }).done(function (dataWine) {
+        
         console.log(dataWine);
         //remove previous food items 
         $('.foodRecom').empty();
@@ -43,6 +46,7 @@ function passWine(type) {
         $('.foodRecom').on('click', '.btn', function () {
             foodItem = $(this).val();
             //pick if there is any allergy or preference
+            let dietpref = '';
             if ($('#gf').is(':checked')) {
                 dietpref += ' gluten free ';
             };
@@ -65,6 +69,9 @@ function passWine(type) {
             };
 
             $.ajax(settings1).done(function (recipes) {
+                if (!$.trim(recipes)) {
+                    alert('Not a valid location');
+                }
                 console.log(recipes);
                 cardnum = $('.card');
                

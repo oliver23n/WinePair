@@ -15,7 +15,7 @@
       🥂WinePair🍷
     </h1>
   </header>
-
+<!-- Supported Wine modal -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     Supported Wine
   </button>
@@ -106,6 +106,28 @@
         </div>
       </div>
     </div>
+    <!-- Modal for not supported wine-->
+    <div class="modal fade" id="notSupported" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">ALERT</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h3>
+              Invalid input for wine!
+            </h3>
+            <p>Check the supported wine list for more information.</p> 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+      
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- wine input field -->
     <div class="input-group flex-nowrap">
       <span class="input-group-text" id="addon-wrapping">Enter Your Wine:</span>
@@ -115,7 +137,7 @@
     </div>
     <p id="wineDesc">Add wine desc here</p>
     <h2>Select any dietary restrictions:</h2>
-    <!-- dietary restrictions cards -->
+    <!-- dietary restrictions forms -->
 
     <div>
       <div class="form-check">
@@ -130,11 +152,9 @@
         <input class="form-check-input" type="checkbox" value="vegetarian" id="veg" name="veg">
         <label class="form-check-label" for="veg">Vegetarian</label>
       </div>
-      <!-- <button id="gf" type="button" class="btn btn-light btn-lg">Gluten Free</button>
-      <button id="df" type="button" class="btn btn-dark btn-lg">Dairy Free</button>
-      <button id="vg" type="button" class="btn btn-light btn-lg">Vegetarian</button> -->
     </div>
   </div>
+
   <!-- three food recommendations -->
   <h2>Here are some food recommendations:</h2>
   <div class="foodRecom">
