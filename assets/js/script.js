@@ -5,7 +5,7 @@ let fooditem;
 
 // Get the input for the wine 
 function getWine() {
-    wineType = $('#inputWine').val();
+    wineType = $('#inputWine').val().toLowerCase();
     passWine(wineType);
  
   
@@ -68,9 +68,13 @@ function passWine(type) {
                 }
             };
 
-            $.ajax(settings1).done(function (recipes) {
-                if (!$.trim(recipes)) {
-                    alert('Not a valid location');
+            $.ajax(settings1)
+            .fail(function(){
+                $('#noRecipe').modal('show');
+            }).done(function (recipes) {
+                if(recipes.count == 0){
+                 $('#noRecipe').modal('show');
+                    return;
                 }
                 console.log(recipes);
                 cardnum = $('.card');
