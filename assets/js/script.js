@@ -4,14 +4,13 @@ let fooditem;
 
 
 // Get the input for the wine 
-function getWine(){
-    wineType = $('#inputWine').val();
+function getWine() {
+    wineType = $('#inputWine').val().toLowerCase();
     passWine(wineType);
+ 
+  
 }
-function sendWineData(){
-
-}
-function passWine(type){
+function passWine(type) {
     //pair the wine api (Based on the type of wine generate food items)
     const settings = {
         async: true,
@@ -24,23 +23,44 @@ function passWine(type){
         }
     };
 
-    $.ajax(settings).done(function (dataWine) {
+    $.ajax(settings).fail(function(){
+        $('#notSupported').modal('show');
+    }).done(function (dataWine) {
+        
+        console.log(dataWine);
+        //remove previous food items 
+        $('.foodRecom').empty();
         let = wineDescription = dataWine.text;
-        //pick if there is any allergy or preference
-        let dietpref = '';
+       
+      
         $('#wineDesc').text(dataWine.text);
         // generate the food items
-        for(let i = 0; i<dataWine.pairings.length; i++ ){
-            $('#option' + i).text(dataWine.pairings[i]).val(dataWine.pairings[i]);
+        for (let i = 0; i < dataWine.pairings.length; i++) {
+            current = dataWine.pairings[i];
+            buttonFood = $('<button>');
+            buttonFood.attr('id', 'option' + i).addClass('btn btn-light').text(current).val(current);
+            $('.foodRecom').append(buttonFood);
         }
+       
 
-        $('.foodRecom').on('click','.btn', function(){
-           foodItem = $(this).val();
+        $('.foodRecom').on('click', '.btn', function () {
+            foodItem = $(this).val();
+            //pick if there is any allergy or preference
+            let dietpref = '';
+            if ($('#gf').is(':checked')) {
+                dietpref += ' gluten free ';
+            };
+            if ($('#df').is(':checked')) {
+                dietpref += ' dairy free ';
+            };
+            if ($('#veg').is(':checked')) {
+                dietpref += ' vegetarian ';
+            };
             //generate recipes api 
             const settings1 = {
                 async: true,
                 crossDomain: true,
-                url: 'https://edamam-recipe-search.p.rapidapi.com/search?q=' + foodItem,
+                url: 'https://edamam-recipe-search.p.rapidapi.com/search?q=' + dietpref + foodItem,
                 method: 'GET',
                 headers: {
                     'X-RapidAPI-Key': '5932463005msha3ed8e2f210665ep1e2f5cjsne6bc7cc14e2c',
@@ -48,52 +68,41 @@ function passWine(type){
                 }
             };
 
-            $.ajax(settings1).done(function (recipes) {
+            $.ajax(settings1)
+            .fail(function(){
+                $('#noRecipe').modal('show');
+            }).done(function (recipes) {
+                if(recipes.count == 0){
+                 $('#noRecipe').modal('show');
+                    return;
+                }
                 console.log(recipes);
                 cardnum = $('.card');
+               
+                console.log(dietpref);
                 //populate cards
-                for(let j = 0; j<cardnum.length; j++){
+                for (let j = 0; j < cardnum.length; j++) {
                     //name
                     $('#name' + j).text(recipes.hits[j].recipe.label).val(recipes.hits[j].recipe.label);
                     //pic
-                    $('#img'+j).attr('src',recipes.hits[j].recipe.image);
+                    $('#img' + j).attr('src', recipes.hits[j].recipe.image);
                     //link
-                    $('#link'+j).text("Link to the recipe").attr('href',recipes.hits[j].recipe.url);
+                    $('#link' + j).text("Link to this recipe").attr('href', recipes.hits[j].recipe.url);
                 }
             });
         })
-        
 
-        console.log(dataWine);
 
-        
-        //generate recipes api 
-        const settings1 = {
-                async: true,
-                crossDomain: true,
-            url: 'https://edamam-recipe-search.p.rapidapi.com/search?q=' + fooditem,
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': '5932463005msha3ed8e2f210665ep1e2f5cjsne6bc7cc14e2c',
-                'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
-            }
-        };
-        
-        $.ajax(settings1).done(function (response1) {
-                console.log(response1);
-            });
-        });
-    }
-    function init(){
-        $('#submitB').on('click',getWine);
-        
-        
-        
-    }
-    init();
-    
-    
-    //based on the picked food item and the allergy populate the cards 
+    });
+}
+function init() {
+    $('#submitB').on('click', getWine);
+
+}
+init();
+
+
+
     //get the selected name of the recipe (clicked)
     //store the recipe and type of wine in an object( Name, picture, link, type Of Wine )
 
