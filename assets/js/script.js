@@ -92,6 +92,19 @@ function passWine(type) {
                 }
                 $('#showRecipes').removeClass('hidden');
             });
+            $('.card-group','.saveBtn',function(e){
+                
+                console.log();
+                let savedRecipe = {
+                    wine: wineType,
+                    recipeName: $(this).parent()
+                    // recipeImg: recipes.hits[j].recipe.url
+                    // recipeLink: recipes.hits[j].recipe.url
+                }
+
+
+            })
+
         })
 
 
