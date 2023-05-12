@@ -1,4 +1,3 @@
-
 let wineType;
 let fooditem;
 let savedRecipes = [];
@@ -25,27 +24,30 @@ function passWine(type) {
     };
 
     $.ajax(settings).fail(function () {
+        //if the input is invalid
         $('#notSupported').modal('show');
     }).done(function (dataWine) {
 
-        console.log(dataWine);
         //remove previous food items 
         $('.foodRecom').empty();
+
+        //description of wine
         let = wineDescription = dataWine.text;
-
-
         $('#wineDesc').text(dataWine.text);
-        // generate the food items
+
+        // generate the food items(buttons)
         for (let i = 0; i < dataWine.pairings.length; i++) {
             current = dataWine.pairings[i];
             buttonFood = $('<button>');
             buttonFood.attr('id', 'option' + i).addClass('btn btn-light').text(current).val(current);
             $('.foodRecom').append(buttonFood);
         }
-        $('#starterRemove').removeClass('hidden');  
+        //show the buttons and the dietary preference
+        $('#starterRemove').removeClass('hidden');
+        //hide recipes if there are any
         $('#showRecipes').addClass('hidden');
 
-
+        //when a food item is selected
         $('.foodRecom').on('click', '.btn', function () {
             foodItem = $(this).val();
             //pick if there is any allergy or preference
@@ -73,16 +75,17 @@ function passWine(type) {
 
             $.ajax(settings1)
                 .fail(function () {
+                    //if there is no result
                     $('#noRecipe').modal('show');
                 }).done(function (recipes) {
-                    if (recipes.count == 0) {
+                    //if there is no recipe
+                    if (recipes.count == 0 || recipes.count == 1) {
                         $('#noRecipe').modal('show');
                         return;
                     }
-                    console.log(recipes);
+
                     cardnum = $('.card');
 
-                    console.log(dietpref);
                     //populate cards
                     for (let j = 0; j < cardnum.length; j++) {
                         //name
@@ -92,19 +95,25 @@ function passWine(type) {
                         //link
                         $('#link' + j).text("Link to this recipe").attr('href', recipes.hits[j].recipe.url).val(recipes.hits[j].recipe.url);
                     }
+                    //show the recipes
                     $('#showRecipes').removeClass('hidden');
                 });
+            //saving the recipe 
             $('#showRecipes').on('click', '.saveBtn', function () {
+                //get the name
                 let thisRecipeName = ($(this).parent().children().eq(0).val());
+                //get the img
                 let thisRecipeImg = $(this).parent().parent().children('.card-img-top').attr('src');
+                //get the link
                 let thisRecipeLink = $(this).parent().children().eq(1).val()
+                //store 
                 let saveThisRecipe = {
                     wine: wineType,
                     recipeName: thisRecipeName,
                     recipeImg: thisRecipeImg,
                     recipeLink: thisRecipeLink
                 };
-
+                //check if it is a duplicate
                 let found = false;
                 for (let j = 0; j < savedRecipes.length; j++) {
                     if ((savedRecipes[j].recipeName == saveThisRecipe.recipeName) && (savedRecipes[j].wine == saveThisRecipe.wine)) {
@@ -112,26 +121,25 @@ function passWine(type) {
                         break;
                     }
                 }
+                //if its not a duplicate store it in client-storage
                 if (!found) {
                     savedRecipes.push(saveThisRecipe);
                     localStorage.setItem("stored", JSON.stringify(savedRecipes));
                 }
-
+                //show the saved recipes
+                renderItems();
             })
-            renderItems();
-
         })
-
-
     });
 }
+//show saved recipes
 function renderItems() {
     let history = $('#saved');
     //clear 
     history.empty();
     //get from local storage 
     let items = getLocal();
-    console.log(items);
+
     for (let i = 0; i < items.length; i++) {
         div = $('<div>');
         img = $('<img>');
@@ -146,20 +154,20 @@ function renderItems() {
         history.append(div);
     }
 }
+//get from local storage
 function getLocal() {
     stored = JSON.parse(localStorage.getItem('stored'));
     return stored;
 }
+//main
 function init() {
     $('#submitB').on('click', getWine);
     renderItems();
     savedRecipes = getLocal();
-
 }
+
 init();
 
 
 
-    //get the selected name of the recipe (clicked)
-    //store the recipe and type of wine in an object( Name, picture, link, type Of Wine )
 
