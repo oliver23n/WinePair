@@ -1,12 +1,13 @@
 
 let wineType;
 let fooditem;
-
+let savedRecipes =[];
 
 // Get the input for the wine 
 function getWine() {
     wineType = $('#inputWine').val().toLowerCase();
     passWine(wineType);
+
  
   
 }
@@ -88,30 +89,70 @@ function passWine(type) {
                     //pic
                     $('#img' + j).attr('src', recipes.hits[j].recipe.image);
                     //link
-                    $('#link' + j).text("Link to this recipe").attr('href', recipes.hits[j].recipe.url);
+                    $('#link' + j).text("Link to this recipe").attr('href', recipes.hits[j].recipe.url).val(recipes.hits[j].recipe.url);
                 }
                 $('#showRecipes').removeClass('hidden');
             });
-            $('.card-group','.saveBtn',function(e){
-                
-                console.log();
-                let savedRecipe = {
+            $('#showRecipes').on('click','.saveBtn',function(){
+                let thisRecipeName = ($(this).parent().children().eq(0).val());
+                let thisRecipeImg = $(this).parent().parent().children('.card-img-top').attr('src');
+                let thisRecipeLink = $(this).parent().children().eq(1).val()
+                let saveThisRecipe = {
                     wine: wineType,
-                    recipeName: $(this).parent()
-                    // recipeImg: recipes.hits[j].recipe.url
-                    // recipeLink: recipes.hits[j].recipe.url
+                    recipeName: thisRecipeName,
+                    recipeImg: thisRecipeImg,
+                    recipeLink: thisRecipeLink
+                };
+
+                let found = false;
+                for (let j = 0; j < savedRecipes.length; j++) {
+                    if ((savedRecipes[j].recipeName == saveThisRecipe.recipeName) && (savedRecipes[j].wine == saveThisRecipe.wine )) {
+                        found = true;
+                        break;
+                    }
                 }
-
-
+                if(!found){
+                    savedRecipes.push(saveThisRecipe);
+                    localStorage.setItem("stored",JSON.stringify(savedRecipes));
+                }
+                
             })
+            renderItems();
 
         })
 
 
     });
 }
+function renderItems(){
+       let history = $('#saved');
+       //clear 
+       history.empty();
+       //get from local storage 
+       let items =  getLocal();
+       console.log(items);
+       for( let i = 0; i<items.length; i++){
+            div = $('<div>');
+            img  = $('<img>');
+            img.attr('src', items[i].recipeImg);
+            name1 = $('<h3>');
+            name1.text(items[i].recipeName);
+            wine = $('<h4>')
+            wine.text(items[i].wine);
+            link = $('<a>');
+            link.text('Link to recipe').attr('href',items[i].recipeLink);
+            div.append(img,name1,wine,link);
+            history.append(div);
+       }
+}
+function getLocal(){
+     stored = JSON.parse(localStorage.getItem('stored'));
+    return stored;
+}
 function init() {
     $('#submitB').on('click', getWine);
+    renderItems();
+    savedRecipes = getLocal();
 
 }
 init();
