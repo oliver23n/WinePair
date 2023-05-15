@@ -156,8 +156,12 @@ function renderItems() {
 }
 //get from local storage
 function getLocal() {
-    stored = JSON.parse(localStorage.getItem('stored'));
-    return stored;
+    stored = localStorage.getItem('stored');
+    if (stored) {
+        JSON.parse(stored);
+    } else {
+        return []
+    }
 }
 //main
 function init() {
