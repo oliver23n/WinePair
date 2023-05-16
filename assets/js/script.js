@@ -89,11 +89,14 @@ function passWine(type) {
                     //populate cards
                     for (let j = 0; j < cardnum.length; j++) {
                         //name
+                        if (recipes.hits[j]) {
                         $('#name' + j).text(recipes.hits[j].recipe.label).val(recipes.hits[j].recipe.label);
                         //pic
                         $('#img' + j).attr('src', recipes.hits[j].recipe.image);
                         //link
                         $('#link' + j).text("Link to this recipe").attr('href', recipes.hits[j].recipe.url).val(recipes.hits[j].recipe.url);
+                        $('#card-' + j).removeClass('hidden');
+                    }
                     }
                     //show the recipes
                     $('#showRecipes').removeClass('hidden');
@@ -156,8 +159,12 @@ function renderItems() {
 }
 //get from local storage
 function getLocal() {
-    stored = JSON.parse(localStorage.getItem('stored'));
-    return stored;
+    stored = localStorage.getItem('stored');
+    if (stored) {
+        JSON.parse(stored);
+    } else {
+        return []
+    }
 }
 //main
 function init() {
