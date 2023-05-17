@@ -41,7 +41,30 @@ h2 {
     padding: 5px;
     width: 100%;
 }
+.foodRecom {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 50%;
+}
 
+.previous {
+    border: black solid 2px;
+    margin: 10px;
+    padding: 15px;
+}
+
+#saved {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.btn{
+    border-style: solid;
+    border-color: #1f3950;
+    border-width: 0cap;
+}
 
 .card {
     display: flex;

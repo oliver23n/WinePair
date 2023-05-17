@@ -145,6 +145,7 @@ function renderItems() {
 
     for (let i = 0; i < items.length; i++) {
         div = $('<div>');
+        div.addClass ("previous")
         img = $('<img>');
         img.attr('src', items[i].recipeImg);
         name1 = $('<h3>');
@@ -161,7 +162,7 @@ function renderItems() {
 function getLocal() {
     stored = localStorage.getItem('stored');
     if (stored) {
-        JSON.parse(stored);
+        return JSON.parse(stored);
     } else {
         return []
     }
