@@ -145,12 +145,13 @@ function renderItems() {
 
     for (let i = 0; i < items.length; i++) {
         div = $('<div>');
+        div.addClass ("previous")
         img = $('<img>');
         img.attr('src', items[i].recipeImg);
         name1 = $('<h3>');
         name1.text(items[i].recipeName);
         wine = $('<h4>')
-        wine.text(items[i].wine);
+        wine.text("Wine Choice: " + items[i].wine);
         link = $('<a>');
         link.text('Link to recipe').attr('href', items[i].recipeLink);
         div.append(img, name1, wine, link);
@@ -161,7 +162,7 @@ function renderItems() {
 function getLocal() {
     stored = localStorage.getItem('stored');
     if (stored) {
-        JSON.parse(stored);
+        return JSON.parse(stored);
     } else {
         return []
     }

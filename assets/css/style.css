@@ -9,6 +9,11 @@ body {
     min-height: fit-content;
   }
 
+#wineDesc {
+    margin: 5px 5px;
+    padding: 5px;
+
+}
 nav a {
     color: #ffffff;
     font-weight: bold;
@@ -41,7 +46,48 @@ h2 {
     padding: 5px;
     width: 100%;
 }
+.foodRecom {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 5px auto;
+    padding: 5px;
+}
 
+.previous {
+    border: rgb(0, 0, 0) solid 2px;
+    margin: 10px;
+    padding: 15px;
+    box-shadow: 5px 5px 5px rgb(90, 86, 86);
+    
+}
+
+#saved {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.btn{
+    border-style: solid;
+    border-color: #1f3950;
+    border-width: 0cap;
+}
+
+#submitB {
+    padding: 0 20px;
+}
+
+
+.diet-form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 50%;
+    margin: 5px auto;
+    padding: 5px;
+}
 
 .card {
     display: flex;
