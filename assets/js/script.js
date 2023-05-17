@@ -151,7 +151,7 @@ function renderItems() {
         name1 = $('<h3>');
         name1.text(items[i].recipeName);
         wine = $('<h4>')
-        wine.text(items[i].wine);
+        wine.text("Wine Choice: " + items[i].wine);
         link = $('<a>');
         link.text('Link to recipe').attr('href', items[i].recipeLink);
         div.append(img, name1, wine, link);
