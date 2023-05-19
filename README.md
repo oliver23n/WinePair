@@ -7,11 +7,11 @@ This repository contains code for a web application that returns recipes for foo
 
 ## Installation
 
-The code may be accessed on [GitHub](https://github.com/oliver23n/WinePair) or visiting the site URL (https://oliver23n.github.io/WinePair/).
+The code may be accessed on [GitHub](https://github.com/choelzli/WinePair) or visiting the site URL (https://choelzli.github.io/WinePair/).
 
 Clone the repo:
 ```
-git clone https://github.com/oliver23n/WinePair.git
+git clone https://github.com/choelzli/WinePair.git
 ```
 
 ---
